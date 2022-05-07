@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_app/screens/add_task.dart';
+import 'package:task_app/screens/all_tasks.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,7 +8,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      home: const AllTasks(),
       // home: const HomeScreen(),
-      home: const AddTask(),
+      // home: const AddTask(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_app/colors/app_colors.dart';
+import 'package:task_app/utils/responsive_widget.dart';
 import 'package:task_app/widgets/button_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +15,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding:
+            EdgeInsets.symmetric(horizontal: Dimensions.widthDimension(20)),
         width: double.maxFinite,
         height: double.maxFinite,
         decoration: const BoxDecoration(
@@ -30,29 +32,29 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height / 5,
+              height: Dimensions.deviceScreenHeight / 5,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Hello',
                     style: TextStyle(
                       color: AppColors.mainColor,
-                      fontSize: 58,
+                      fontSize: Dimensions.heightDimension(58),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     'start your beautiful day.',
                     style: TextStyle(
-                      color: AppColors.smallTextColor,
-                    ),
+                        color: AppColors.smallTextColor,
+                        fontSize: Dimensions.heightDimension(16)),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 5,
+              height: Dimensions.deviceScreenHeight / 5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: const [

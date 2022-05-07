@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_app/utils/responsive_widget.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -16,17 +17,17 @@ class ButtonWidget extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       width: double.maxFinite,
-      height: MediaQuery.of(context).size.height / 14,
+      height: Dimensions.deviceScreenHeight / 14,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-            (MediaQuery.of(context).size.height / 14) / 2),
+        borderRadius:
+            BorderRadius.circular(Dimensions.deviceScreenHeight / 14 / 2),
         color: bgColor,
       ),
       child: Text(
         text,
         style: TextStyle(
           color: color,
-          fontSize: 20,
+          fontSize: Dimensions.deviceScreenHeight / 14 / 3,
         ),
       ),
     );

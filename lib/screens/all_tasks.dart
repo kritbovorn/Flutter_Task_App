@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_app/colors/app_colors.dart';
 import 'package:task_app/utils/responsive_widget.dart';
+import 'package:task_app/widgets/button_widget.dart';
 import 'package:task_app/widgets/task_widget.dart';
 
 class AllTasks extends StatelessWidget {
@@ -23,10 +24,10 @@ class AllTasks extends StatelessWidget {
       ),
     );
 
-    Widget rightDeleteIcon = Container(  
+    Widget rightDeleteIcon = Container(
       alignment: Alignment.centerRight,
       color: Colors.red,
-      child: const Icon(  
+      child: const Icon(
         Icons.delete,
         color: Colors.white,
       ),
@@ -116,9 +117,53 @@ class AllTasks extends StatelessWidget {
                         debugPrint('### DISMISSED');
                       },
                       confirmDismiss: (DismissDirection direction) async {
-                        debugPrint('Are you confirm to delete it, Sire');
-
-                        return true;
+                        // debugPrint('Are you confirm to delete it, Sire');
+                        if (direction == DismissDirection.startToEnd) {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
+                            barrierColor: Colors.transparent,
+                            context: context,
+                            builder: (_) => Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.widthDimension(20),
+                              ),
+                              height: Dimensions.deviceScreenHeight * 0.5,
+                              decoration: BoxDecoration(
+                                  color: AppColors.modalBottomSheetColor
+                                      .withOpacity(0.4),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(
+                                        Dimensions.heightDimension(20)),
+                                    topRight: Radius.circular(
+                                        Dimensions.heightDimension(20)),
+                                  )),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const ButtonWidget(
+                                    text: 'View',
+                                    color: Colors.white,
+                                    bgColor: AppColors.mainColor,
+                                  ),
+                                  SizedBox(
+                                    height: Dimensions.heightDimension(20),
+                                  ),
+                                  const ButtonWidget(
+                                    text: 'Edit',
+                                    color: Colors.white,
+                                    bgColor: AppColors.mainColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                          return false;
+                        } else {
+                          return Future.delayed(
+                            const Duration(seconds: 1),
+                            () => direction == DismissDirection.endToStart,
+                          );
+                        }
                       },
                       child: TaskWidget(
                         text: myData[index],

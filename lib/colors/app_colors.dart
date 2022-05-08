@@ -7,4 +7,5 @@ class AppColors {
   static const textHolder = Color(0xFFedf0f8);
   static const textGrey = Color(0xFFafb1b5);
   static const taskColor = Color(0xFFEDF0F8);
+  static const modalBottomSheetColor = Color(0xFF2E3253);
 }

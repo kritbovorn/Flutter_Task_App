@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:task_app/colors/app_colors.dart';
 import 'package:task_app/utils/responsive_widget.dart';
 import 'package:task_app/widgets/button_widget.dart';
@@ -185,7 +186,7 @@ class AllTasks extends StatelessWidget {
                       Row(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () => Get.back(),
                             icon: const Icon(Icons.arrow_back_ios),
                           ),
                         ],

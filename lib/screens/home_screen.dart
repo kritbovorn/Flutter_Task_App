@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:task_app/colors/app_colors.dart';
+import 'package:task_app/screens/add_task.dart';
+import 'package:task_app/screens/all_tasks.dart';
 import 'package:task_app/utils/responsive_widget.dart';
 import 'package:task_app/widgets/button_widget.dart';
 
@@ -57,16 +60,32 @@ class _HomeScreenState extends State<HomeScreen> {
               height: Dimensions.deviceScreenHeight / 5,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  ButtonWidget(
-                    text: 'Add Task',
-                    bgColor: AppColors.mainColor,
-                    color: Colors.white,
+                children: [
+                  InkWell(
+                    onTap: () => Get.to(
+                      () => const AddTask(),
+                      transition: Transition.zoom,
+                      duration: const Duration(
+                        seconds: 1,
+                      ),
+                    ),
+                    child: const ButtonWidget(
+                      text: 'Add Task',
+                      bgColor: AppColors.mainColor,
+                      color: Colors.white,
+                    ),
                   ),
-                  ButtonWidget(
-                    text: 'View All',
-                    color: AppColors.mainColor,
-                    bgColor: Colors.white,
+                  InkWell(
+                    onTap: () => Get.to(
+                      () => const AllTasks(),
+                      transition: Transition.circularReveal,
+                      duration: const Duration(seconds: 1),
+                    ),
+                    child: const ButtonWidget(
+                      text: 'View All',
+                      color: AppColors.mainColor,
+                      bgColor: Colors.white,
+                    ),
                   ),
                 ],
               ),

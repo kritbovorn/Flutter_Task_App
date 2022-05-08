@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:task_app/colors/app_colors.dart';
 import 'package:task_app/utils/responsive_widget.dart';
 import 'package:task_app/widgets/button_widget.dart';
@@ -35,16 +36,12 @@ class AddTask extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: Dimensions.heightDimension(8)),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: AppColors.mainColor,
-                            size: Dimensions.heightDimension(30),
-                          ),
+                      IconButton(
+                        onPressed: () => Get.back(),
+                        icon: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: AppColors.mainColor,
+                          size: Dimensions.heightDimension(30),
                         ),
                       ),
                     ],
@@ -85,7 +82,7 @@ class AddTask extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

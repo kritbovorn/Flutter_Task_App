@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:task_app/colors/app_colors.dart';
 import 'package:task_app/utils/responsive_widget.dart';
+import 'package:task_app/widgets/task_widget.dart';
 
 class AllTasks extends StatelessWidget {
   const AllTasks({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List myData = [
+      "Try harder",
+      "Try smarter",
+      "Try again and again",
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -72,10 +79,22 @@ class AllTasks extends StatelessWidget {
                             fontSize: Dimensions.heightDimension(20),
                             fontWeight: FontWeight.bold,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ],
+                ),
+              ),
+              Flexible(
+                child: ListView.builder(
+                  // shrinkWrap: true,
+                  itemCount: myData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return TaskWidget(
+                      text: myData[index],
+                      color: Colors.blueGrey,
+                    );
+                  },
                 ),
               ),
             ],

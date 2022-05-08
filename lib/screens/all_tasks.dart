@@ -14,6 +14,24 @@ class AllTasks extends StatelessWidget {
       "Try again and again",
     ];
 
+    Widget leftEditIcon = Container(
+      alignment: Alignment.centerLeft,
+      color: const Color(0xff2e3253).withOpacity(0.5),
+      child: const Icon(
+        Icons.edit,
+        color: Colors.white,
+      ),
+    );
+
+    Widget rightDeleteIcon = Container(  
+      alignment: Alignment.centerRight,
+      color: Colors.red,
+      child: const Icon(  
+        Icons.delete,
+        color: Colors.white,
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -90,9 +108,22 @@ class AllTasks extends StatelessWidget {
                   // shrinkWrap: true,
                   itemCount: myData.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return TaskWidget(
-                      text: myData[index],
-                      color: Colors.blueGrey,
+                    return Dismissible(
+                      key: ObjectKey(index),
+                      background: leftEditIcon,
+                      secondaryBackground: rightDeleteIcon,
+                      onDismissed: (DismissDirection direction) {
+                        debugPrint('### DISMISSED');
+                      },
+                      confirmDismiss: (DismissDirection direction) async {
+                        debugPrint('Are you confirm to delete it, Sire');
+
+                        return true;
+                      },
+                      child: TaskWidget(
+                        text: myData[index],
+                        color: Colors.blueGrey,
+                      ),
                     );
                   },
                 ),

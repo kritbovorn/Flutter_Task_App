@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:task_app/colors/app_colors.dart';
 import 'package:task_app/utils/responsive_widget.dart';
 import 'package:task_app/widgets/button_widget.dart';
+import 'package:task_app/widgets/error_warning_message.dart';
 import 'package:task_app/widgets/textfield_widget.dart';
 
 class AddTask extends StatelessWidget {
@@ -14,12 +15,27 @@ class AddTask extends StatelessWidget {
     TextEditingController detailEditingController = TextEditingController();
     bool _dataValidation() {
       if (textEditingController.text.trim() == "") {
-        Get.snackbar("### Oops!!! Task Name", "Task Name is empty");
+        ErrorMessage.taskErrorOrWarning(
+            "Task Name", "### Oops: Your task name is empty");
+        return false;
+      } else if (textEditingController.text.length < 6) {
+        ErrorMessage.taskErrorOrWarning("Task Name",
+            "### Oops: Your Task Name should be at least 6 characters");
 
         return false;
       } else if (detailEditingController.text.trim() == "") {
-        Get.snackbar(
-            "### Oops!!! Task Description", "Task Description is empty");
+        ErrorMessage.taskErrorOrWarning(
+            "Task Description", "### Oops: Your Task Description is empty");
+
+        return false;
+      } else if (detailEditingController.text.length < 8) {
+        ErrorMessage.taskErrorOrWarning("Task Description",
+            "### Oops: Your Task Description should be at least 8 characters");
+
+        return false;
+      } else if (detailEditingController.text.length < 8) {
+        ErrorMessage.taskErrorOrWarning("Task Description",
+            "### Oops: Your Task Description should be at least 8 characters");
 
         return false;
       }

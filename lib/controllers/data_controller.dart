@@ -29,4 +29,18 @@ class DataController extends GetxController {
       debugPrint("@@@ Oops, Something wrong about connect Server: in data_controller.dart");
     }
   }
+
+  Future<void> postData(String task, String taskDetail) async {
+
+    _isLoading = true;
+
+    Response response = await dataService.postData({
+      "task": task,
+      "task_detail": taskDetail,
+    });
+
+    if (response.statusCode == 200) {
+      
+    }
+  }
 }

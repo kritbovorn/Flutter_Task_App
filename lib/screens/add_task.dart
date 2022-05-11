@@ -10,8 +10,21 @@ class AddTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _textEditingController = TextEditingController();
-    TextEditingController _detailEditingController = TextEditingController();
+    TextEditingController textEditingController = TextEditingController();
+    TextEditingController detailEditingController = TextEditingController();
+    bool _dataValidation() {
+      if (textEditingController.text.trim() == "") {
+        Get.snackbar("### Oops!!! Task Name", "Task Name is empty");
+
+        return false;
+      } else if (detailEditingController.text.trim() == "") {
+        Get.snackbar(
+            "### Oops!!! Task Description", "Task Description is empty");
+
+        return false;
+      }
+      return true;
+    }
 
     return Scaffold(
       body: Stack(
@@ -56,21 +69,26 @@ class AddTask extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         TextfieldWidget(
-                          textEditingController: _textEditingController,
+                          textEditingController: textEditingController,
                           hintText: 'Task name',
                           prefixIcon: const Icon(
                             Icons.note_add_sharp,
                           ),
                         ),
                         TextfieldWidget(
-                          textEditingController: _detailEditingController,
+                          textEditingController: detailEditingController,
                           hintText: 'Task detail...',
                           maxLines: 5,
                         ),
-                        const ButtonWidget(
-                          text: 'Add',
-                          color: Colors.white,
-                          bgColor: AppColors.mainColor,
+                        GestureDetector(
+                          onTap: () {
+                            _dataValidation();
+                          },
+                          child: const ButtonWidget(
+                            text: 'Add',
+                            color: Colors.white,
+                            bgColor: AppColors.mainColor,
+                          ),
                         ),
                       ],
                     ),

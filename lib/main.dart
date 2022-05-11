@@ -1,5 +1,8 @@
+// https://www.youtube.com/watch?v=-Sol_RMG_fo
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_app/controllers/data_controller.dart';
 import 'package:task_app/screens/home_screen.dart';
 
 void main() {
@@ -9,8 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  loadData() async {
+    await Get.find<DataController>().getData();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    Get.lazyPut(() => DataController(),);
+   
+   loadData();
+    
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Task App',

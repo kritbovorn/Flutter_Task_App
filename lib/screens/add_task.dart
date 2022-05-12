@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_app/colors/app_colors.dart';
+import 'package:task_app/controllers/data_controller.dart';
+import 'package:task_app/screens/all_tasks.dart';
 import 'package:task_app/utils/responsive_widget.dart';
 import 'package:task_app/widgets/button_widget.dart';
 import 'package:task_app/widgets/error_warning_message.dart';
@@ -11,29 +13,29 @@ class AddTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
-    TextEditingController detailEditingController = TextEditingController();
+    TextEditingController nameController = TextEditingController();
+    TextEditingController detailController = TextEditingController();
     bool _dataValidation() {
-      if (textEditingController.text.trim() == "") {
+      if (nameController.text.trim() == "") {
         ErrorMessage.taskErrorOrWarning(
             "Task Name", "### Oops: Your task name is empty");
         return false;
-      } else if (textEditingController.text.length < 6) {
+      } else if (nameController.text.length < 6) {
         ErrorMessage.taskErrorOrWarning("Task Name",
             "### Oops: Your Task Name should be at least 6 characters");
 
         return false;
-      } else if (detailEditingController.text.trim() == "") {
+      } else if (detailController.text.trim() == "") {
         ErrorMessage.taskErrorOrWarning(
             "Task Description", "### Oops: Your Task Description is empty");
 
         return false;
-      } else if (detailEditingController.text.length < 8) {
+      } else if (detailController.text.length < 8) {
         ErrorMessage.taskErrorOrWarning("Task Description",
             "### Oops: Your Task Description should be at least 8 characters");
 
         return false;
-      } else if (detailEditingController.text.length < 8) {
+      } else if (detailController.text.length < 8) {
         ErrorMessage.taskErrorOrWarning("Task Description",
             "### Oops: Your Task Description should be at least 8 characters");
 
@@ -85,20 +87,29 @@ class AddTask extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         TextfieldWidget(
-                          textEditingController: textEditingController,
+                          textEditingController: nameController,
                           hintText: 'Task name',
                           prefixIcon: const Icon(
                             Icons.note_add_sharp,
                           ),
                         ),
                         TextfieldWidget(
-                          textEditingController: detailEditingController,
+                          textEditingController: detailController,
                           hintText: 'Task detail...',
-                          maxLines: 5,
+                          maxLines: 2,
                         ),
                         GestureDetector(
                           onTap: () {
-                            _dataValidation();
+                            if (_dataValidation()) {
+                              Get.find<DataController>().postData(
+                                nameController.text.trim(),
+                                detailController.text.trim(),
+                              );
+                              Get.to(
+                                () => const AllTasks(),
+                                transition: Transition.circularReveal,
+                              );
+                            }
                           },
                           child: const ButtonWidget(
                             text: 'Add',

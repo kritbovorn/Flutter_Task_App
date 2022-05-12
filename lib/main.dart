@@ -13,16 +13,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  loadData() async {
+  _loadData() async {
     await Get.find<DataController>().getData();
   }
 
   @override
   Widget build(BuildContext context) {
 
-    Get.lazyPut(() => DataController(),);
-   
-   loadData();
+    Get.lazyPut(() => DataController());
+   _loadData();
     
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

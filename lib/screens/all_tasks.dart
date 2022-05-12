@@ -1,20 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_app/colors/app_colors.dart';
+import 'package:task_app/controllers/data_controller.dart';
 import 'package:task_app/utils/responsive_widget.dart';
 import 'package:task_app/widgets/button_widget.dart';
 import 'package:task_app/widgets/task_widget.dart';
 
-class AllTasks extends StatelessWidget {
+class AllTasks extends StatefulWidget {
   const AllTasks({Key? key}) : super(key: key);
 
   @override
+  State<AllTasks> createState() => _AllTasksState();
+}
+
+class _AllTasksState extends State<AllTasks> {
+  _loadData() async {
+    await Get.find<DataController>().getData();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      _loadData();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List myData = [
-      "Try harder",
-      "Try smarter",
-      "Try again and again",
-    ];
+    _loadData;
+    debugPrint(Get.find<DataController>().myData.length.toString() +
+        " @@@ : all_tasks.dart: line 33");
 
     Widget leftEditIcon = Container(
       alignment: Alignment.centerLeft,
@@ -106,9 +123,10 @@ class AllTasks extends StatelessWidget {
                 ),
               ),
               Flexible(
-                child: ListView.builder(
+                  child: GetBuilder<DataController>(
+                builder: (controller) => ListView.builder(
                   // shrinkWrap: true,
-                  itemCount: myData.length,
+                  itemCount: controller.myData.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Dismissible(
                       key: ObjectKey(index),
@@ -167,13 +185,13 @@ class AllTasks extends StatelessWidget {
                         }
                       },
                       child: TaskWidget(
-                        text: myData[index],
+                        text: controller.myData[index]["task_name"],
                         color: Colors.blueGrey,
                       ),
                     );
                   },
                 ),
-              ),
+              )),
             ],
           ),
           SafeArea(
